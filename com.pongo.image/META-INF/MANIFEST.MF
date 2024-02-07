@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Image
+Bundle-SymbolicName: com.pongo.image
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: PONGO
+Automatic-Module-Name: com.pongo.image
+Bundle-RequiredExecutionEnvironment: JavaSE-17
+Export-Package: com.pongo.image

@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Main
+Bundle-SymbolicName: com.pongo.main
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: PONGO
+Automatic-Module-Name: com.pongo.main
+Bundle-RequiredExecutionEnvironment: JavaSE-17
+Require-Bundle: com.pongo.image;bundle-version="1.0.0",
+ com.pongo.tesseract;bundle-version="1.0.0"
