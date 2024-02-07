@@ -1,5 +1,7 @@
 package com.pongo.main.ui;
 
+import com.pongo.main.constants.Constants;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
@@ -19,6 +21,7 @@ public class Main extends Application {
         docview_sc.setFitToWidth(true);
         
         TextArea documentText = new TextArea();
+        documentText.setText(Constants.TEXTAREA_DEF_MESSAGE);
         docview_sc.setContent(documentText);
         
         // Menu section
