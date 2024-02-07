@@ -2,6 +2,8 @@ package com.pongo.main.ui;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import com.pongo.image.ImageUtils;
 import com.pongo.main.constants.Constants;
@@ -33,7 +35,7 @@ public class LeftMenu {
 
 		Button filechooser_btn = new Button("...");
 		filechooser_btn.setOnAction(e -> { 
-			selectedfile = showFileChooser(filename_l); 
+			selectedfile = initFileChooser(filename_l); 
 			if (selectedfile != null) {
 				BufferedImage image = ImageUtils.FileToBufferedImage(selectedfile);
 				String extracted_text = null;
@@ -55,7 +57,11 @@ public class LeftMenu {
 
 		Button extract_btn = new Button("Save");
 		extract_btn.setOnAction(e -> { 
-			System.out.println("Save Button");
+			File file = initFileCreator();
+	        if (file != null) {
+	            saveStringToFile(textarea.getText(), file);
+	        }
+	        
 			resetComponentState(textarea, filename_l);
 		});
 
@@ -72,10 +78,36 @@ public class LeftMenu {
 		filename_l.setText(Constants.FILENAME_LABEL_DEF_MESSAGE);
 	}
 	
-	private File showFileChooser(Label label) {
+	private void saveStringToFile(String content, File file) {
+        try (FileWriter fileWriter = new FileWriter(file)) {
+            fileWriter.write(content);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+	
+	// Creates file where the extracted text is saved to.
+	private File initFileCreator() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save Text File");
+
+        File initialDirectory = new File(Constants.HOME_DIR);
+        fileChooser.setInitialDirectory(initialDirectory);
+
+        // Set the extension filter for text files
+        FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter("Text Files (*.txt)", "*.txt");
+        fileChooser.getExtensionFilters().add(extFilter);
+
+        // Show the Save File dialog
+        File file = fileChooser.showSaveDialog(null);
+        
+        return file;
+	}
+	
+	// Opens dialog for choosing files
+	private File initFileChooser(Label label) {
 		FileChooser fileChooser = new FileChooser();
 
-		// Set initial directory (optional)
 		File initialDirectory = new File(Constants.HOME_DIR);
 		fileChooser.setInitialDirectory(initialDirectory);
 
